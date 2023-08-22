@@ -7,10 +7,14 @@
     <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <style>
-        body {
-            background-color: #999999;
+
+          body, html {
+        height: 100%;
+        margin: 0; /* Kenar boşluklarını kaldırın */
+                   background-color: #999999;
             font-family: 'Oswald', sans-serif;
-        }
+    }
+  
         p {
             color: #000000;
             font-size: 20px;
@@ -52,18 +56,12 @@
         document.execCommand("copy");
         $temp.remove();
 
+        // Mesajın gönderildiğini logla
+        console.log("Mesaj gönderiliyor...");
+
         // Ana eklentiye bir mesaj gönder
         window.parent.postMessage({ command: 'notifyCopySuccess' }, '*');
     }
-
-        
-        function copyToClipboard(element) {
-            var $temp = $("<input>");
-            $("body").append($temp);
-            $temp.val($(element).text()).select();
-            document.execCommand("copy");
-            $temp.remove();
-        }
     </script>
 </body>
 </html>
