@@ -7,14 +7,10 @@
     <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <style>
-
-          body, html {
-        height: 100%;
-        margin: 0; /* Kenar boşluklarını kaldırın */
-                   background-color: #999999;
+        body {
+            background-color: #999999;
             font-family: 'Oswald', sans-serif;
-    }
-  
+        }
         p {
             color: #000000;
             font-size: 20px;
@@ -41,27 +37,22 @@
     <center>
         <p id="p1">Hello, I'm TEXT 1</p>
         <p id="p2">Hi, I'm the 2nd TEXT</p><br/>
-<button onclick="copyAndNotify('#p1')">Copy TEXT 1</button>
-<button onclick="copyAndNotify('#p2')">Copy TEXT 2</button>
+        <button onclick="copyAndNotify('#p1')">Copy TEXT 1</button>
+        <button onclick="copyAndNotify('#p2')">Copy TEXT 2</button>
         <br/><br/>
         <input class="textBox" type="text" id="" placeholder="Dont belive me?..TEST it here..;)" />
     </center>
     <script>
+        function copyAndNotify(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
 
-
-    function copyAndNotify(element) {
-        var $temp = $("<input>");
-        $("body").append($temp);
-        $temp.val($(element).text()).select();
-        document.execCommand("copy");
-        $temp.remove();
-
-        // Mesajın gönderildiğini logla
-        console.log("Mesaj gönderiliyor...");
-
-        // Ana eklentiye bir mesaj gönder
-        window.parent.postMessage({ command: 'notifyCopySuccess' }, '*');
-    }
+            // Ana eklentiye bir mesaj gönder
+            window.parent.postMessage({ command: 'notifyCopySuccess' }, '*');
+        }
     </script>
 </body>
 </html>
