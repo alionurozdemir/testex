@@ -1,27 +1,55 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy to Clipboard</title>
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: #999999;
+            font-family: 'Oswald', sans-serif;
+        }
+        p {
+            color: #000000;
+            font-size: 20px;
+        }
+        .textBox {
+            height: 30px;
+            width: 300px;
+        }
+        button {
+            height: 30px;
+            width: 150px;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 20px;
+            font-family: 'Oswald', sans-serif;
+            height: 52px;
+            cursor: pointer;
+            background-color: wheat;
+        }
+    </style>
+</head>
 <body>
-
-<p>Click on the button to copy the text from the text field. Try to paste the text (e.g. ctrl+v) afterwards in a different window, to see the effect.</p>
-
-<input type="text" value="Hello World" id="myInput">
-<button onclick="myFunction()">Copy text</button>
-
-<script>
-function myFunction() {
-  // Get the text field
-  var copyText = document.getElementById("myInput");
-
-  // Select the text field
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); // For mobile devices
-
-  // Copy the text inside the text field
-  navigator.clipboard.writeText(copyText.value);
-  
-  // Alert the copied text
-  alert("Copied the text: " + copyText.value);
-}
-</script>
-
+    <p style="color:wheat;font-size:55px;text-align:center;">How to copy a TEXT to Clipboard on a Button-Click</p>
+    <center>
+        <p id="p1">Hello, I'm TEXT 1</p>
+        <p id="p2">Hi, I'm the 2nd TEXT</p><br/>
+        <button onclick="copyToClipboard('#p1')">Copy TEXT 1</button>
+        <button onclick="copyToClipboard('#p2')">Copy TEXT 2</button>
+        <br/><br/>
+        <input class="textBox" type="text" id="" placeholder="Dont belive me?..TEST it here..;)" />
+    </center>
+    <script>
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
+    </script>
 </body>
 </html>
